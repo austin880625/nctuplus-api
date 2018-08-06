@@ -3,7 +3,8 @@ class CoursesController < ApplicationController
 
   # GET /courses
   def index
-    @courses = Course.all
+    @q = Course.ransack(params[:q])
+    @courses = @q.result(distinct: true)
 
     render json: @courses
   end
